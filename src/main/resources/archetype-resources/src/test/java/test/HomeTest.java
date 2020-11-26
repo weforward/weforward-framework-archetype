@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import cn.weforward.common.util.StringUtil;
+import cn.weforward.protocol.Header;
 import cn.weforward.protocol.Response;
 import cn.weforward.protocol.client.ServiceInvoker;
 import cn.weforward.protocol.client.ServiceInvokerFactory;
@@ -37,6 +38,9 @@ public class HomeTest {
 		String accessKey = result.getProperty("weforward.service.accessKey");
 		String serviceName = result.getProperty("weforward.name");
 		m_Invoker = ServiceInvokerFactory.create(serviceName, preUrl, accessId, accessKey);
+		if (StringUtil.isEmpty(accessId) && StringUtil.isEmpty(accessKey)) {
+			m_Invoker.setAuthType(Header.AUTH_TYPE_NONE);
+		}
 	}
 
 	private ServiceInvoker getInvoker() {
@@ -47,7 +51,7 @@ public class HomeTest {
 	public void test() {
 		SimpleDtObject params = new SimpleDtObject();
 		params.put("name", "World");
-		Response response = getInvoker().invoke("/home/hello", params);
+		Response response = getInvoker().invoke("home/hello", params);
 		System.out.println("code:" + response.getResponseCode());
 		System.out.println("msg:" + response.getResponseMsg());
 		System.out.println("result" + response.getServiceResult());
