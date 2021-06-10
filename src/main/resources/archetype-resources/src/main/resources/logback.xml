@@ -13,6 +13,8 @@
 		<url>${rlog.url}</url>
 		<projectName>${project_name}</projectName>
 		<serverid>${weforward.serverid}</serverid>
+		<userName>${weforward.service.accessId}</userName>
+		<password>${weforward.service.accessKey}</password>
 		<layout class="ch.qos.logback.classic.PatternLayout">
 			<pattern>%d{HH:mm:ss.SSS}[%thread]%-5level %logger{50} %msg%n
 			</pattern>
