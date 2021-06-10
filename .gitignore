@@ -1,0 +1,8 @@
+bin
+target
+tmp
+.settings
+.classpath
+.project
+.flattened-pom.xml
+.svn
